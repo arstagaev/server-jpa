@@ -1,0 +1,45 @@
+server:
+  port: 8082
+
+# Spring Boot configuration http://127.0.0.1:8082/swagger-ui.html#
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/new_command?currentSchema=public
+    username: new_command
+    password: new_command
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
+
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: validate # When you launch the application for the first time - switch "none" at "create" validate
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: false
+
+flyway:
+  url: jdbc:postgresql://127.0.0.1:5432/new_command # here chached
+  schemas: public
+  user: new_command
+  password: new_command
+
+# Logger configuration
+logging:
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+  level:
+    org.springframework: info
+    org.hibernate: debug
+  file:
+    name: /log/sceleton-service.log
+
